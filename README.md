@@ -6,7 +6,7 @@ PHP extension implementation of RFC-6570 in C - http://tools.ietf.org/html/rfc65
 Usage examples (see unit tests for more examples)
 --------------------------------------------------
 
-	```php
+```php
 	$data = array(
 		"query"  => "mycelium",
 	       "number" => 100
@@ -21,4 +21,4 @@ Usage examples (see unit tests for more examples)
 	//     [result] => http://www.example.com/foo?query=mycelium&number=100
 	//     [state] => 0
 	// )
-	```
+```

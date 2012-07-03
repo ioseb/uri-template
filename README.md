@@ -9,7 +9,7 @@ Usage examples (see unit tests for more examples)
 ```php
 	$data = array(
 		"query"  => "mycelium",
-	       "number" => 100
+		"number" => 100
 	);
   
 	$result = uri_template('http://www.example.com/foo{?query,number}', $data);

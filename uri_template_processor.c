@@ -4,22 +4,21 @@
   uri_template_expr *expr, uri_template_var *var, zval *vars, smart_str *result
 
 inline static zend_bool array_is_assoc(zval *array) {
+  HashPosition pos;
+  ulong num_key;
   int key_type;
   uint key_len;
   char *str_key;
-  ulong num_key;
-  HashPosition pos;
-  zval **entry;
   
-  zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(array), &pos);
-  while (zend_hash_get_current_data_ex(Z_ARRVAL_P(array), (void**)&entry, &pos) == SUCCESS) {
+  for (zend_hash_internal_pointer_reset_ex(Z_ARRVAL_P(array), &pos);
+       zend_hash_has_more_elements_ex(Z_ARRVAL_P(array), &pos) == SUCCESS;
+       zend_hash_move_forward_ex(Z_ARRVAL_P(array), &pos)) {
+  
     key_type = zend_hash_get_current_key_ex(Z_ARRVAL_P(array), &str_key, &key_len, &num_key, 0, &pos);
     
     if (key_type == HASH_KEY_IS_STRING) {
       return 1;
     }
-    
-    zend_hash_move_forward_ex(Z_ARRVAL_P(array), &pos);
   }
   
   return 0;
@@ -185,7 +184,6 @@ void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result
   
   while (var != NULL) {
     smart_str eval = {0};
-    
     status = process_var(expr, var, vars, &eval);
     
     if (status) {

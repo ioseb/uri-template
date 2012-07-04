@@ -64,7 +64,6 @@ uri_template_vars *uri_template_vars_create();
 uri_template_var  *uri_template_var_create();
 uri_template_expr *uri_template_expr_create(char operator);
 
-void uri_template_vars_add(uri_template_vars *list, uri_template_var *var);
 void uri_template_vars_free(uri_template_vars *list);
 void uri_template_var_free(uri_template_var *var);
 void uri_template_expr_add_var(uri_template_expr *expr, uri_template_var *var);

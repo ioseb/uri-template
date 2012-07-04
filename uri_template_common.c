@@ -4,18 +4,6 @@ uri_template_vars *uri_template_vars_create() {
   return ecalloc(1, sizeof(uri_template_vars));
 }
 
-void uri_template_vars_add(uri_template_vars *list, uri_template_var *var) {
-  if (list->first == NULL) {
-    list->first = var;
-    list->last = var;
-  } else {
-    list->last->next = var;
-    list->last = var;
-  }
-  
-  list->count++;
-}
-
 void uri_template_vars_free(uri_template_vars *list) {
   uri_template_var *first = list->first;
   uri_template_var *prev;
@@ -73,7 +61,17 @@ uri_template_expr *uri_template_expr_create(char operator) {
 }
 
 void uri_template_expr_add_var(uri_template_expr *expr, uri_template_var *var) {
-  uri_template_vars_add(expr->vars, var);
+  uri_template_vars *list = expr->vars;
+  
+  if (list->first == NULL) {
+    list->first = var;
+    list->last = var;
+  } else {
+    list->last->next = var;
+    list->last = var;
+  }
+  
+  list->count++;
 }
 
 void uri_template_expr_free(uri_template_expr *expr) {

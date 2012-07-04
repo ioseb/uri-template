@@ -23,6 +23,72 @@ This will result to following URI:
 
 	http://www.example.com/foo?query=mycelium&number=100
 
+Capturing Execution State
+-------------------------
+
+uri_template(...) function supports third optional parameter for capturing URI template parsing and processing state. Sometimes it's handy to see how template was parsed. Example below demonstrates usage of this parameter:
+
+```php
+<?php
+$data = array(
+  "id"      => array("person","albums"),
+  "token"   => "12345",
+  "fields"  => array("id", "name", "picture"),
+);
+
+$tpl = "{/id*}{?fields,token}";
+uri_template($tpl, $data, $result);
+?>
+```
+
+After executing example code above $result variable will have following structure:
+
+```php
+<?php
+array (
+  'result' => '/person/albums?fields=id,name,picture&token=12345',
+  'state' => 0,
+  'expressions' => array (
+    0 => array (
+      'op' => '/',
+      'sep' => '/',
+      'ifemp' => '',
+      'allow' => false,
+      'named' => false,
+      'error' => false,
+      'vars' => array (
+        0 => array (
+          'name' => 'id',
+          'length' => 0,
+          'explode' => true,
+        ),
+      ),
+    ),
+    1 => array (
+      'op' => '?',
+      'sep' => '&',
+      'ifemp' => '=',
+      'allow' => false,
+      'named' => true,
+      'error' => false,
+      'vars' => array (
+        0 => array (
+          'name' => 'fields',
+          'length' => 0,
+          'explode' => false,
+        ),
+        1 => array (
+          'name' => 'token',
+          'length' => 0,
+          'explode' => false,
+        ),
+      ),
+    ),
+  ),
+)
+?>
+```
+
 Detailed examples
 -----------------
 

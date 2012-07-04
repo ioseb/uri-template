@@ -179,22 +179,22 @@ static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
 
 void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result) {
   uri_template_var *var = expr->vars->first;
+  zend_bool status = 0;
   zend_bool processed = 0;
-  zend_bool prev_step = 0;
   int i = 0;
   
   while (var != NULL) {
     smart_str eval = {0};
     
-    processed = process_var(expr, var, vars, &eval);
+    status = process_var(expr, var, vars, &eval);
     
-    if (processed) {
+    if (status) {
       smart_str_0(&eval);
       
       if (i == 0 && expr->first) {
         smart_str_appendc(result, expr->first);
         i++;
-      } else if (prev_step) {
+      } else if (processed) {
         smart_str_appendc(result, expr->sep);
       }
       
@@ -202,7 +202,7 @@ void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result
     }
     
     smart_str_free(&eval);
-    prev_step |= processed;
+    processed |= status;
     var = var->next;
   }
 }

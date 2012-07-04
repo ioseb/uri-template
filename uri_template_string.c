@@ -85,7 +85,7 @@ inline static void utf8_append_badchar(smart_str *dest) {
   }
 }
 
-inline static char *utf8_copy_char(smart_str *dest, char **cursor) {
+static char *utf8_copy_char(smart_str *dest, char **cursor) {
   unsigned char first = **cursor;
   unsigned char second = *(*cursor + 1) ^ 0x80;
   unsigned char third;

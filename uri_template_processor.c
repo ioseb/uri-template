@@ -70,7 +70,7 @@ static void process_associative_array(URI_TEMPLATE_PROCESSING_ARGS) {
   }
 }
 
-inline static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS) {
+static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS) {
   HashPosition pos;
   zval **entry;
   char separator = var->explode ? expr->sep : ',';

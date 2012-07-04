@@ -5,6 +5,9 @@
 #define MAX_THREE_BYTE_CHAR 0xffff
 #define MAX_FOUR_BYTE_CHAR  0x1fffff
 
+#define ALLOWED_CHARS(expr) (expr->op == '+' || expr->op == '#' \
+  ? URI_TEMPLATE_ALLOW_RESERVED : URI_TEMPLATE_ALLOW_UNRESERVED)
+
 static unsigned char hexchars[]       = "0123456789ABCDEF";
 static unsigned char badchar[]        = {239, 191, 189};
 static unsigned char urlchars[3][128] = {
@@ -176,17 +179,12 @@ void uri_template_substr_copy(smart_str *dest, char *source, size_t num, int all
 void uri_template_copy_var_valuel(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var) {
   size_t len = var->length && (var->length < Z_STRLEN_P(val)) 
     ? var->length : Z_STRLEN_P(val);
-  int allowed_chars = expr->op == '+' || expr->op == '#'
-    ? URI_TEMPLATE_ALLOW_RESERVED : URI_TEMPLATE_ALLOW_UNRESERVED;
   
-  uri_template_substr_copy(dest, Z_STRVAL_P(val), len, allowed_chars);
+  uri_template_substr_copy(dest, Z_STRVAL_P(val), len, ALLOWED_CHARS(expr));
 }
 
 void uri_template_copy_var_value(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var) {
-  int allowed_chars = expr->op == '+' || expr->op == '#'
-    ? URI_TEMPLATE_ALLOW_RESERVED : URI_TEMPLATE_ALLOW_UNRESERVED;
-  
-  uri_template_substr_copy(dest, Z_STRVAL_P(val), Z_STRLEN_P(val), allowed_chars);
+  uri_template_substr_copy(dest, Z_STRVAL_P(val), Z_STRLEN_P(val), ALLOWED_CHARS(expr));
 }
 
 void uri_template_copy_var_name(smart_str *dest, uri_template_var *var) {

@@ -13,13 +13,7 @@ $data = array(
 	"number" => 100
 );
 
-$result = uri_template('http://www.example.com/foo{?query,number}', $data);
+echo uri_template('http://www.example.com/foo{?query,number}', $data);
 
-print_r($result);
-
-// Array
-// (
-//     [result] => http://www.example.com/foo?query=mycelium&number=100
-//     [state] => 0
-// )
+// http://www.example.com/foo?query=mycelium&number=100
 ```

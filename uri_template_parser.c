@@ -9,7 +9,7 @@
 inline static int extract_num(char *str, int len) {
   char buff[len + 1];
   strncpy(buff, str, len);
-  buff[len] = '\0';
+  buff[len] = 0;
   
   return atoi(buff);
 }
@@ -26,7 +26,7 @@ static uri_template_expr *build_expr(char *tpl, int len) {
     expr = uri_template_expr_create(0);
   }
   
-  while (*tpl != '\0' && tpl - start <= len) {
+  while (*tpl && tpl - start <= len) {
     switch(*tpl) {
       case '%':
         if (name + len - tpl > 2) {

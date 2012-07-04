@@ -63,7 +63,7 @@ static unsigned char urlchars[3][128] = {
 };
 
 inline static void append_encoded(smart_str *dest, const char *source, size_t num) {
-  register unsigned char c;
+  unsigned char c;
   int i;
 
   for (i = 0; i < num; i++) {

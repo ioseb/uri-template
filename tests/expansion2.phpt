@@ -27,15 +27,23 @@ $data = array(
 );
 
 $templates = array(
-  '{count}'   => 'one,two,three',
-  '{count*}'  => 'one,two,three',
-  '{/count}'  => '/one,two,three',
-  '{/count*}' => '/one/two/three',
-  '{;count}'  => ';count=one,two,three',
-  '{;count*}' => ';count=one;count=two;count=three',
-  '{?count}'  => '?count=one,two,three',
-  '{?count*}' => '?count=one&count=two&count=three',
-  '{&count*}' => '&count=one&count=two&count=three',
+  "{+var}"              => "value",
+  "{+hello}"            => "Hello%20World!",
+  "{+half}"             => "50%25",
+  "{base}index"         => "http%3A%2F%2Fexample.com%2Fhome%2Findex",
+  "{+base}index"        => "http://example.com/home/index",
+  "O{+empty}X"          => "OX",
+  "O{+undef}X"          => "OX",
+  "{+path}/here"        => "/foo/bar/here",
+  "here?ref={+path}"    => "here?ref=/foo/bar",
+  "up{+path}{var}/here" => "up/foo/barvalue/here",
+  "{+x,hello,y}"        => "1024,Hello%20World!,768",
+  "{+path,x}/here"      => "/foo/bar,1024/here",
+  "{+path:6}/here"      => "/foo/b/here",
+  "{+list}"             => "red,green,blue",
+  "{+list*}"            => "red,green,blue",
+  "{+keys}"             => "semi,;,dot,.,comma,,",
+  "{+keys*}"            => "semi=;,dot=.,comma=,"
 );
 
 $out = array();
@@ -50,67 +58,123 @@ foreach ($templates as $tpl => $expect) {
 var_dump($out);
 ?>
 --EXPECT--
-array(9) {
+array(17) {
   [0]=>
   array(2) {
     ["result"]=>
-    string(13) "one,two,three"
+    string(5) "value"
     ["state"]=>
     int(0)
   }
   [1]=>
   array(2) {
     ["result"]=>
-    string(13) "one,two,three"
+    string(14) "Hello%20World!"
     ["state"]=>
     int(0)
   }
   [2]=>
   array(2) {
     ["result"]=>
-    string(14) "/one,two,three"
+    string(5) "50%25"
     ["state"]=>
     int(0)
   }
   [3]=>
   array(2) {
     ["result"]=>
-    string(14) "/one/two/three"
+    string(39) "http%3A%2F%2Fexample.com%2Fhome%2Findex"
     ["state"]=>
     int(0)
   }
   [4]=>
   array(2) {
     ["result"]=>
-    string(20) ";count=one,two,three"
+    string(29) "http://example.com/home/index"
     ["state"]=>
     int(0)
   }
   [5]=>
   array(2) {
     ["result"]=>
-    string(32) ";count=one;count=two;count=three"
+    string(2) "OX"
     ["state"]=>
     int(0)
   }
   [6]=>
   array(2) {
     ["result"]=>
-    string(20) "?count=one,two,three"
+    string(2) "OX"
     ["state"]=>
     int(0)
   }
   [7]=>
   array(2) {
     ["result"]=>
-    string(32) "?count=one&count=two&count=three"
+    string(13) "/foo/bar/here"
     ["state"]=>
     int(0)
   }
   [8]=>
   array(2) {
     ["result"]=>
-    string(32) "&count=one&count=two&count=three"
+    string(17) "here?ref=/foo/bar"
+    ["state"]=>
+    int(0)
+  }
+  [9]=>
+  array(2) {
+    ["result"]=>
+    string(20) "up/foo/barvalue/here"
+    ["state"]=>
+    int(0)
+  }
+  [10]=>
+  array(2) {
+    ["result"]=>
+    string(23) "1024,Hello%20World!,768"
+    ["state"]=>
+    int(0)
+  }
+  [11]=>
+  array(2) {
+    ["result"]=>
+    string(18) "/foo/bar,1024/here"
+    ["state"]=>
+    int(0)
+  }
+  [12]=>
+  array(2) {
+    ["result"]=>
+    string(11) "/foo/b/here"
+    ["state"]=>
+    int(0)
+  }
+  [13]=>
+  array(2) {
+    ["result"]=>
+    string(14) "red,green,blue"
+    ["state"]=>
+    int(0)
+  }
+  [14]=>
+  array(2) {
+    ["result"]=>
+    string(14) "red,green,blue"
+    ["state"]=>
+    int(0)
+  }
+  [15]=>
+  array(2) {
+    ["result"]=>
+    string(20) "semi,;,dot,.,comma,,"
+    ["state"]=>
+    int(0)
+  }
+  [16]=>
+  array(2) {
+    ["result"]=>
+    string(20) "semi=;,dot=.,comma=,"
     ["state"]=>
     int(0)
   }

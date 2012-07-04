@@ -157,7 +157,7 @@ static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
       convert_to_string_ex(entry);
       
       if (!expr->named) {
-        uri_template_copy_var_value(result, *entry, expr, var);
+        uri_template_copy_var_valuel(result, *entry, expr, var);
       } else {
         uri_template_copy_var_name(result, var);
         
@@ -167,7 +167,7 @@ static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
           }
         } else {
           smart_str_appendc(result, '=');
-          uri_template_copy_var_value(result, *entry, expr, var);
+          uri_template_copy_var_valuel(result, *entry, expr, var);
         }
       }
     }

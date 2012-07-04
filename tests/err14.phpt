@@ -21,7 +21,7 @@ $data = array(
   "searchTerms" => "uri templates"
 );
 
-$result = uri_template('?q={searchTerms}&amp;c={example:color?}', $data, TRUE);
+uri_template('?q={searchTerms}&amp;c={example:color?}', $data, $result);
 
 var_dump($result);
 ?>

@@ -48,7 +48,9 @@ $templates = array(
 $out = array();
 
 foreach ($templates as $tpl => $expect) {
-  $result = uri_template($tpl, $data);
+  $result = NULL;
+  uri_template($tpl, $data, $result);
+  unset($result['expressions']);
   $out[] = $result;
 }
 

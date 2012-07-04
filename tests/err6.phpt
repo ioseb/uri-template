@@ -21,7 +21,7 @@ $data = array(
   "searchTerms" => "uri templates"
 );
 
-$result = uri_template("{??hello}", $data, TRUE);
+uri_template("{??hello}", $data, $result);
 
 var_dump($result);
 ?>

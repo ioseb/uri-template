@@ -71,6 +71,7 @@ void uri_template_expr_free(uri_template_expr *expr);
 void uri_template_parse(char *tpl, zval *return_value, zval *vars, zend_bool capture);
 void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result);
 void uri_template_substr_copy(smart_str *dest, char *source, size_t num, int allowed_chars);
+void uri_template_copy_var_valuel(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var);
 void uri_template_copy_var_value(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var);
 void uri_template_copy_var_name(smart_str *dest, uri_template_var *var);
 

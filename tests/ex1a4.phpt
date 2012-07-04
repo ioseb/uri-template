@@ -2,7 +2,8 @@
 uri_template() query parameters test - example 4 no parameters
 --FILE--
 <?php
-$result = uri_template('http://www.example.com/foo{?query,number}', array());
+uri_template('http://www.example.com/foo{?query,number}', array(), $result);
+unset($result['expressions']);
 
 var_dump($result);
 ?>

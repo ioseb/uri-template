@@ -2,12 +2,14 @@
 uri_template() query parameters test - example 1 two query parameters
 --FILE--
 <?php
-$result = uri_template('http://www.example.com/foo{?query,number}', array(
+uri_template('http://www.example.com/foo{?query,number}', array(
   "query"  => "mycelium",
   "number" => 100
-));
+), $result);
 
+unset($result['expressions']);
 var_dump($result);
+
 ?>
 --EXPECT--
 array(2) {

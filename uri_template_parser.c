@@ -110,21 +110,19 @@ inline static void append_malformed_expr(smart_str *dest, char *tpl, int len) {
 }
 
 inline static void add_expr_to_array(zval *expressions, uri_template_expr *expr) {
+  uri_template_var *next;
   zval *result;
   zval *vars;
+  char op[2] = {expr->op, 0};
+  char sep[2] = {expr->sep, 0};
+  char ifemp[2] = {expr->ifemp, 0};
   
   MAKE_STD_ZVAL(result);
   array_init(result);
   
-  char op[2] = {expr->op, 0};
   add_assoc_string(result, "op", op, 1);
-  
-  char sep[2] = {expr->sep, 0};
   add_assoc_string(result, "sep", sep, 1);
-  
-  char ifemp[2] = {expr->ifemp, 0};
   add_assoc_string(result, "ifemp", ifemp, 1);
-  
   add_assoc_bool(result, "allow", expr->allow);
   add_assoc_bool(result, "named", expr->named);
   add_assoc_bool(result, "error", expr->error);
@@ -132,7 +130,7 @@ inline static void add_expr_to_array(zval *expressions, uri_template_expr *expr)
   MAKE_STD_ZVAL(vars);
   array_init(vars);
   
-  uri_template_var *next = expr->vars->first;
+  next = expr->vars->first;
   
   while (next != NULL) {
     zval *var;

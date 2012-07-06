@@ -204,7 +204,7 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
         smart_str_appendc(&result, *tpl++);
         smart_str_appendc(&result, *tpl++);
       } else {
-        uri_template_substr_copy(&result, tpl - 1, 1, URI_TEMPLATE_ALLOW_LITERALS);
+        uri_template_substr_copy(&result, tpl - 1, 1, URI_TEMPLATE_ALLOW_RESERVED);
       }
     }
   }

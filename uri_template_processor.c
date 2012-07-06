@@ -3,6 +3,24 @@
 #define URI_TEMPLATE_PROCESSING_ARGS \
   uri_template_expr *expr, uri_template_var *var, zval *vars, smart_str *result
 
+#define ALLOWED_CHARS(expr) (expr->op == '+' || expr->op == '#' \
+  ? URI_TEMPLATE_ALLOW_RESERVED : URI_TEMPLATE_ALLOW_UNRESERVED)
+
+inline static void copy_var_valuel(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var) {
+  size_t len = var->length && (var->length < Z_STRLEN_P(val)) 
+    ? var->length : Z_STRLEN_P(val);
+  
+  uri_template_substr_copy(dest, Z_STRVAL_P(val), len, ALLOWED_CHARS(expr));
+}
+
+inline static void copy_var_value(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var) {
+  uri_template_substr_copy(dest, Z_STRVAL_P(val), Z_STRLEN_P(val), ALLOWED_CHARS(expr));
+}
+
+inline static void copy_var_name(smart_str *dest, uri_template_var *var) {
+  uri_template_substr_copy(dest, var->name, strlen(var->name), URI_TEMPLATE_ALLOW_UNRESERVED);
+}
+
 inline static zend_bool array_is_assoc(zval *array) {
   HashPosition pos;
   ulong num_key;
@@ -56,11 +74,11 @@ static void process_associative_array(URI_TEMPLATE_PROCESSING_ARGS) {
           smart_str_appendc(result, '=');
         }
 
-        uri_template_copy_var_value(result, *entry, expr, var);
+        copy_var_value(result, *entry, expr, var);
       } else {
         if (Z_STRLEN_PP(entry)) {
           smart_str_appendc(result, ',');
-          uri_template_copy_var_value(result, *entry, expr, var);
+          copy_var_value(result, *entry, expr, var);
         }
       }
     }
@@ -87,7 +105,7 @@ static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS) {
       convert_to_string_ex(entry);
       
       if (var->explode && expr->named) {
-        uri_template_copy_var_name(result, var);
+        copy_var_name(result, var);
         
         if (!Z_STRLEN_PP(entry)) {
           if (expr->ifemp) {
@@ -98,7 +116,7 @@ static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS) {
         }
       }
       
-      uri_template_copy_var_value(result, *entry, expr, var);
+      copy_var_value(result, *entry, expr, var);
     }
     
     i++;
@@ -119,14 +137,14 @@ static void process_var_array(URI_TEMPLATE_PROCESSING_ARGS) {
   if (!var->explode) {
     if (eval.len) {
       if (expr->named) {
-        uri_template_copy_var_name(result, var);
+        copy_var_name(result, var);
         smart_str_appendc(result, '=');
       }
       
       smart_str_appendl(result, eval.c, eval.len);
     } else {
       if (expr->named) {
-        uri_template_copy_var_name(result, var);
+        copy_var_name(result, var);
         
         if (expr->ifemp) {
           smart_str_appendc(result, expr->ifemp);
@@ -157,9 +175,9 @@ static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
       convert_to_string_ex(entry);
       
       if (!expr->named) {
-        uri_template_copy_var_valuel(result, *entry, expr, var);
+        copy_var_valuel(result, *entry, expr, var);
       } else {
-        uri_template_copy_var_name(result, var);
+        copy_var_name(result, var);
         
         if (!Z_STRLEN_PP(entry)) {
           if (expr->ifemp) {
@@ -167,7 +185,7 @@ static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
           }
         } else {
           smart_str_appendc(result, '=');
-          uri_template_copy_var_valuel(result, *entry, expr, var);
+          copy_var_valuel(result, *entry, expr, var);
         }
       }
     }

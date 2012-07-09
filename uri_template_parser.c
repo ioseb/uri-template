@@ -26,7 +26,7 @@ static uri_template_expr *build_expr(char *tpl, int len) {
     expr = uri_template_expr_create(0);
   }
   
-  while (*tpl && tpl - start <= len) {
+  while (tpl - start <= len) {
     switch(*tpl) {
       case '%':
         if (name + len - tpl > 2) {
@@ -167,46 +167,51 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
   zval_copy_ctor(&vars_ptr);
   
   while (*tpl) {
-    if (*tpl++ == '{') {
-      start = tpl;
+    if (*tpl == '{') {
+      start = tpl + 1;
 
-      while (*tpl) {
-        if (*tpl++ == '}') {
-          uri_template_expr *expr = build_expr(start, tpl - start - 1);
+      while (*(tpl++) && *tpl != '}');
 
-          if (expr->error) {
-            append_malformed_expr(&result, start, tpl - start - 1);
-            
-            if (state == URI_TEMPLATE_ERROR_NONE) {
-              state = URI_TEMPLATE_ERROR_EXPRESSION;
-            }
-          } else {
-            uri_template_process(expr, &vars_ptr, &result);
-          }
+      if (*tpl == '}') {
+        uri_template_expr *expr = build_expr(start, tpl - start);
+        
+        if (expr->error) {
+          append_malformed_expr(&result, start, tpl - start);
           
-          if (expressions != NULL) {
-            add_expr_to_array(expressions, expr);
+          if (state == URI_TEMPLATE_ERROR_NONE) {
+            state = URI_TEMPLATE_ERROR_EXPRESSION;
           }
-          
-          uri_template_expr_free(expr);
-          break;
+        } else {
+          uri_template_process(expr, &vars_ptr, &result);
         }
+        
+        if (expressions != NULL) {
+          add_expr_to_array(expressions, expr);
+        }
+        
+        uri_template_expr_free(expr);
+      } else {
+        smart_str_appendc(&result, '{');
+        smart_str_appendl(&result, start, tpl - start);
+        state = URI_TEMPLATE_ERROR_SYNTAX;
       }
     } else {
-      c = *(tpl - 1);
+      c = *tpl;
       
       if (c == '}') {
         smart_str_appendc(&result, '{');
         smart_str_appendc(&result, '}');
         state = URI_TEMPLATE_ERROR_SYNTAX;
-      } else if (c == '%' && isxdigit(*tpl) && isxdigit(*(tpl + 1))) {
+      } else if (c == '%' && isxdigit(*(tpl + 1)) && isxdigit(*(tpl + 2))) {
         smart_str_appendc(&result, '%');
         smart_str_appendc(&result, *tpl++);
         smart_str_appendc(&result, *tpl++);
       } else {
-        uri_template_substr_copy(&result, tpl - 1, 1, URI_TEMPLATE_ALLOW_RESERVED);
+        uri_template_substr_copy(&result, tpl, 1, URI_TEMPLATE_ALLOW_RESERVED);
       }
     }
+    
+    tpl++;
   }
 
   smart_str_0(&result);

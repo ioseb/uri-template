@@ -195,6 +195,7 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
           smart_str_appends(&result, "{}");
         }
       } else if (*tpl == '{') {
+        php_printf("here\n");
         smart_str_appendl(&result, start - 1, tpl - start + 1);
         state = URI_TEMPLATE_ERROR_SYNTAX;
         tpl--;

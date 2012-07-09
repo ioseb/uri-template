@@ -28,7 +28,7 @@ var_dump($result);
 --EXPECT--
 array(3) {
   ["result"]=>
-  string(6) "/id*{}"
+  string(5) "/id*}"
   ["state"]=>
   int(2)
   ["expressions"]=>

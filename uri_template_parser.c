@@ -195,7 +195,6 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
           smart_str_appends(&result, "{}");
         }
       } else if (*tpl == '{') {
-        php_printf("here\n");
         smart_str_appendl(&result, start - 1, tpl - start + 1);
         state = URI_TEMPLATE_ERROR_SYNTAX;
         tpl--;
@@ -208,7 +207,6 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
       c = *tpl;
 
       if (c == '}') {
-        smart_str_appendc(&result, '{');
         smart_str_appendc(&result, '}');
         state = URI_TEMPLATE_ERROR_SYNTAX;
       } else if (c == '%' && isxdigit(*(tpl + 1)) && isxdigit(*(tpl + 2))) {
@@ -224,10 +222,10 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
   }
 
   smart_str_0(&result);
-  ZVAL_STRING(return_value, result.c, 1);
+  ZVAL_STRING(return_value, result.c ? result.c : "", 1);
 
   if (capture != NULL) {
-    add_assoc_string(capture, "result", result.c, 1);
+    add_assoc_string(capture, "result", result.c ? result.c : "", 1);
     add_assoc_long(capture, "state", state);
     add_assoc_zval(capture, "expressions", expressions);
   }

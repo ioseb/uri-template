@@ -93,19 +93,19 @@ static char *utf8_copy_char(smart_str *dest, char *source) {
 
   if (second & 0xC0) {
     utf8_append_badchar(dest);
-    return source++;
+    return ++source;
   }
 
   if (first < 0xE0) {
     if (first < 0xC0) {
       utf8_append_badchar(dest);
-      return source++;
+      return ++source;
     }
 
     if ((((first << 6) | second) 
         & MAX_TWO_BYTE_CHAR) <= MAX_ONE_BYTE_CHAR) {
       utf8_append_badchar(dest);
-      return source++;
+      return ++source;
     }
 
     append_encoded(dest, source, 2);
@@ -115,14 +115,14 @@ static char *utf8_copy_char(smart_str *dest, char *source) {
   third = *(source + 2) ^ 0x80;
   if (third & 0xC0) {
     utf8_append_badchar(dest);
-    return source++;
+    return ++source;
   }
 
   if (first < 0xF0) {
     if ((((((first << 6) | second) << 6) | third) 
         & MAX_THREE_BYTE_CHAR) <= MAX_TWO_BYTE_CHAR) {
       utf8_append_badchar(dest);
-      return source++;
+      return ++source;
     }
 
     append_encoded(dest, source, 3);
@@ -132,14 +132,14 @@ static char *utf8_copy_char(smart_str *dest, char *source) {
   fourth = *(source + 3) ^ 0x80;
   if (fourth & 0xC0) {
     utf8_append_badchar(dest);
-    return source++;
+    return ++source;
   }
   
   if (first < 0xF8) {
     if (((((((first << 6 | second) << 6) | third) << 6) | fourth)
         & MAX_FOUR_BYTE_CHAR) <= MAX_THREE_BYTE_CHAR) {
       utf8_append_badchar(dest);
-      return source++;
+      return ++source;
     }
 
     append_encoded(dest, source, 4);
@@ -162,6 +162,8 @@ void uri_template_substr_copy(smart_str *dest, char *source, size_t num, int all
     if (c > 127) {
       source = utf8_copy_char(dest, source);
     } else {
+      php_printf("Just char: %c\n", c);
+      
       if (urlchars[allowed_chars][c]) {
         smart_str_appendc(dest, *source);
       } else {

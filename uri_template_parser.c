@@ -157,15 +157,15 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
   unsigned char c;
   char *start;
   int state = URI_TEMPLATE_ERROR_NONE;
-  
+
   if (capture != NULL) {
     MAKE_STD_ZVAL(expressions);
     array_init(expressions);
   }
-  
+
   vars_ptr = *vars;
   zval_copy_ctor(&vars_ptr);
-  
+
   while (*tpl) {
     if (*tpl == '{') {
       start = tpl + 1;
@@ -178,7 +178,7 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
 
           if (expr->error) {
             append_malformed_expr(&result, start, tpl - start);
-          
+
             if (state == URI_TEMPLATE_ERROR_NONE) {
               state = URI_TEMPLATE_ERROR_EXPRESSION;
             }

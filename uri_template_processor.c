@@ -6,22 +6,26 @@
 #define ALLOWED_CHARS(expr) (expr->op == '+' || expr->op == '#' \
   ? URI_TEMPLATE_ALLOW_RESERVED : URI_TEMPLATE_ALLOW_UNRESERVED)
 
-inline static void copy_var_valuel(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var) {
+inline static void copy_var_valuel(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var)
+{
   size_t len = var->length && (var->length < Z_STRLEN_P(val)) 
     ? var->length : Z_STRLEN_P(val);
   
   uri_template_substr_copy(dest, Z_STRVAL_P(val), len, ALLOWED_CHARS(expr));
 }
 
-inline static void copy_var_value(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var) {
+inline static void copy_var_value(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var)
+{
   uri_template_substr_copy(dest, Z_STRVAL_P(val), Z_STRLEN_P(val), ALLOWED_CHARS(expr));
 }
 
-inline static void copy_var_name(smart_str *dest, uri_template_var *var) {
+inline static void copy_var_name(smart_str *dest, uri_template_var *var)
+{
   uri_template_substr_copy(dest, var->name, strlen(var->name), URI_TEMPLATE_ALLOW_UNRESERVED);
 }
 
-inline static zend_bool array_is_assoc(zval *array) {
+inline static zend_bool array_is_assoc(zval *array)
+{
   HashPosition pos;
   ulong num_key;
   int key_type;
@@ -42,7 +46,8 @@ inline static zend_bool array_is_assoc(zval *array) {
   return 0;
 }
 
-static void process_associative_array(URI_TEMPLATE_PROCESSING_ARGS) {
+static void process_associative_array(URI_TEMPLATE_PROCESSING_ARGS)
+{
   uint key_len;
   char *str_key;
   char separator = var->explode ? expr->sep : ',';
@@ -87,7 +92,8 @@ static void process_associative_array(URI_TEMPLATE_PROCESSING_ARGS) {
   }
 }
 
-static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS) {
+static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS)
+{
   HashPosition pos;
   zval **entry;
   char separator = var->explode ? expr->sep : ',';
@@ -123,7 +129,8 @@ static void process_indexed_array(URI_TEMPLATE_PROCESSING_ARGS) {
   }
 }
 
-static void process_var_array(URI_TEMPLATE_PROCESSING_ARGS) {
+static void process_var_array(URI_TEMPLATE_PROCESSING_ARGS)
+{
   smart_str eval = {0};
   
   if (array_is_assoc(vars)) {
@@ -158,7 +165,8 @@ static void process_var_array(URI_TEMPLATE_PROCESSING_ARGS) {
   smart_str_free(&eval);
 }
 
-static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
+static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS)
+{
   zval **entry;
   zend_bool found = zend_hash_find(
     Z_ARRVAL_P(vars),
@@ -194,7 +202,8 @@ static zend_bool process_var(URI_TEMPLATE_PROCESSING_ARGS) {
   return found;
 }
 
-void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result) {
+void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result)
+{
   uri_template_var *var = expr->vars->first;
   zend_bool status = 0;
   zend_bool processed = 0;

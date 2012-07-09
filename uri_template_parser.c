@@ -6,7 +6,8 @@
 #define IS_OPERATOR(c) c == '+' || c == '#' || c == '.' || \
   c == '/' || c == ';' || c == '?' || c == '&'
 
-inline static int extract_num(char *str, int len) {
+inline static int extract_num(char *str, int len)
+{
   char buff[len + 1];
   strncpy(buff, str, len);
   buff[len] = 0;
@@ -14,7 +15,8 @@ inline static int extract_num(char *str, int len) {
   return atoi(buff);
 }
 
-static uri_template_expr *build_expr(char *tpl, int len) {
+static uri_template_expr *build_expr(char *tpl, int len)
+{
   uri_template_expr *expr;
   uri_template_var  *var = uri_template_var_create();
   char *name = tpl, *start = tpl, *prefix;
@@ -103,13 +105,15 @@ static uri_template_expr *build_expr(char *tpl, int len) {
   return expr;
 }
 
-inline static void append_malformed_expr(smart_str *dest, char *tpl, int len) {
+inline static void append_malformed_expr(smart_str *dest, char *tpl, int len)
+{
   smart_str_appendc(dest, '{');
   smart_str_appendl(dest, tpl, len);
   smart_str_appendc(dest, '}');
 }
 
-inline static void add_expr_to_array(zval *expressions, uri_template_expr *expr) {
+inline static void add_expr_to_array(zval *expressions, uri_template_expr *expr)
+{
   uri_template_var *next;
   zval *result;
   zval *vars;
@@ -150,7 +154,8 @@ inline static void add_expr_to_array(zval *expressions, uri_template_expr *expr)
   add_next_index_zval(expressions, result);
 }
 
-void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture) {
+void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture)
+{
   smart_str result = {0};
   zval *expressions = NULL;
   zval  vars_ptr;

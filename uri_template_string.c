@@ -62,7 +62,8 @@ static unsigned char urlchars[3][128] = {
   }
 };
 
-inline static void append_encoded(smart_str *dest, const char *source, size_t num) {
+inline static void append_encoded(smart_str *dest, const char *source, size_t num)
+{
   unsigned char c;
   int i;
 
@@ -75,7 +76,8 @@ inline static void append_encoded(smart_str *dest, const char *source, size_t nu
   }
 }
 
-inline static void utf8_append_badchar(smart_str *dest) {
+inline static void utf8_append_badchar(smart_str *dest)
+{
   int i;
 
   for (i = 0; i < 3; i++) {
@@ -85,7 +87,8 @@ inline static void utf8_append_badchar(smart_str *dest) {
   }
 }
 
-static char *utf8_copy_char(smart_str *dest, char *source) {
+static char *utf8_copy_char(smart_str *dest, char *source)
+{
   unsigned char first = *source;
   unsigned char second = *(source + 1) ^ 0x80;
   unsigned char third;
@@ -149,7 +152,8 @@ static char *utf8_copy_char(smart_str *dest, char *source) {
   return source;
 }
 
-void uri_template_substr_copy(smart_str *dest, char *source, size_t num, int allowed_chars) {
+void uri_template_substr_copy(smart_str *dest, char *source, size_t num, int allowed_chars)
+{
   unsigned char c;
   
   if (num <= 0) {

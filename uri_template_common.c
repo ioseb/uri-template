@@ -1,10 +1,12 @@
 #include "php_uri_template.h"
 
-uri_template_vars *uri_template_vars_create() {
+uri_template_vars *uri_template_vars_create()
+{
   return ecalloc(1, sizeof(uri_template_vars));
 }
 
-void uri_template_vars_free(uri_template_vars *list) {
+void uri_template_vars_free(uri_template_vars *list)
+{
   uri_template_var *first = list->first;
   uri_template_var *prev;
   
@@ -17,16 +19,19 @@ void uri_template_vars_free(uri_template_vars *list) {
   efree(list);
 }
 
-uri_template_var *uri_template_var_create() {
+uri_template_var *uri_template_var_create()
+{
   return ecalloc(1, sizeof(uri_template_var));
 }
 
-void uri_template_var_free(uri_template_var *var) {
+void uri_template_var_free(uri_template_var *var)
+{
   efree(var->name);
   efree(var);
 }
 
-uri_template_expr *uri_template_expr_create(char operator) {
+uri_template_expr *uri_template_expr_create(char operator)
+{
   uri_template_expr *expr = ecalloc(1, sizeof(uri_template_expr));
 
   expr->op   = operator;
@@ -60,7 +65,8 @@ uri_template_expr *uri_template_expr_create(char operator) {
   return expr;
 }
 
-void uri_template_expr_add_var(uri_template_expr *expr, uri_template_var *var) {
+void uri_template_expr_add_var(uri_template_expr *expr, uri_template_var *var)
+{
   uri_template_vars *list = expr->vars;
   
   if (list->first == NULL) {
@@ -74,7 +80,8 @@ void uri_template_expr_add_var(uri_template_expr *expr, uri_template_var *var) {
   list->count++;
 }
 
-void uri_template_expr_free(uri_template_expr *expr) {
+void uri_template_expr_free(uri_template_expr *expr)
+{
   uri_template_vars_free(expr->vars);
   efree(expr);
 }

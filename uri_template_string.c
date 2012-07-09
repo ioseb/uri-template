@@ -162,8 +162,6 @@ void uri_template_substr_copy(smart_str *dest, char *source, size_t num, int all
     if (c > 127) {
       source = utf8_copy_char(dest, source);
     } else {
-      php_printf("Just char: %c\n", c);
-      
       if (urlchars[allowed_chars][c]) {
         smart_str_appendc(dest, *source);
       } else {

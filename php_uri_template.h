@@ -50,14 +50,14 @@ typedef struct uri_template_vars {
 } uri_template_vars;
 
 typedef struct uri_template_expr {
-  char op;                   // operator
-  char first;                // result prefix
-  char sep;                  // variable separator
-  char ifemp;                // if value is empty
-  int  allow;                // allow reserved chars
-  int  named;                // var is named
-  int  error;                // expression is malformed
-  uri_template_vars *vars;   // list of expression vars
+  char op;                   /* operator */
+  char first;                /* result prefix */
+  char sep;                  /* variable separator */
+  char ifemp;                /* if value is empty */
+  int  allow;                /* allow reserved chars */
+  int  named;                /* var is named */
+  int  error;                /* expression is malformed */
+  uri_template_vars *vars;   /* list of expression vars */
 } uri_template_expr;
 
 uri_template_vars *uri_template_vars_create();

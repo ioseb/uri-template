@@ -6,10 +6,7 @@
 #define ALLOWED_CHARS(expr) (expr->op == '+' || expr->op == '#' \
 	? URI_TEMPLATE_ALLOW_RESERVED : URI_TEMPLATE_ALLOW_UNRESERVED)
 
-inline static void copy_var_valuel(smart_str *dest, 
-								zval *val, 
-								uri_template_expr *expr, 
-								uri_template_var *var)
+inline static void copy_var_valuel(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var)
 {
 	size_t len = var->length && (var->length < Z_STRLEN_P(val)) 
 		? var->length : Z_STRLEN_P(val);
@@ -17,10 +14,7 @@ inline static void copy_var_valuel(smart_str *dest,
 	uri_template_substr_copy(dest, Z_STRVAL_P(val), len, ALLOWED_CHARS(expr));
 }
 
-inline static void copy_var_value(smart_str *dest, 
-								zval *val, 
-								uri_template_expr *expr, 
-								uri_template_var *var)
+inline static void copy_var_value(smart_str *dest, zval *val, uri_template_expr *expr, uri_template_var *var)
 {
 	uri_template_substr_copy(dest, Z_STRVAL_P(val), Z_STRLEN_P(val), ALLOWED_CHARS(expr));
 }

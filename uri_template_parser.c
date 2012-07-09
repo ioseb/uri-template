@@ -173,23 +173,27 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
       while (*(tpl++) && *tpl != '}' && *tpl != '{');
 
       if (*tpl == '}') {
-        uri_template_expr *expr = build_expr(start, tpl - start);
-        
-        if (expr->error) {
-          append_malformed_expr(&result, start, tpl - start);
+        if (tpl - start > 0) {
+          uri_template_expr *expr = build_expr(start, tpl - start);
+
+          if (expr->error) {
+            append_malformed_expr(&result, start, tpl - start);
           
-          if (state == URI_TEMPLATE_ERROR_NONE) {
-            state = URI_TEMPLATE_ERROR_EXPRESSION;
+            if (state == URI_TEMPLATE_ERROR_NONE) {
+              state = URI_TEMPLATE_ERROR_EXPRESSION;
+            }
+          } else {
+            uri_template_process(expr, &vars_ptr, &result);
           }
+
+          if (expressions != NULL) {
+            add_expr_to_array(expressions, expr);
+          }
+
+          uri_template_expr_free(expr);
         } else {
-          uri_template_process(expr, &vars_ptr, &result);
+          smart_str_appends(&result, "{}");
         }
-        
-        if (expressions != NULL) {
-          add_expr_to_array(expressions, expr);
-        }
-        
-        uri_template_expr_free(expr);
       } else if (*tpl == '{') {
         smart_str_appendl(&result, start - 1, tpl - start + 1);
         state = URI_TEMPLATE_ERROR_SYNTAX;
@@ -201,7 +205,7 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
       }
     } else {
       c = *tpl;
-      
+
       if (c == '}') {
         smart_str_appendc(&result, '{');
         smart_str_appendc(&result, '}');
@@ -214,7 +218,7 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
         uri_template_substr_copy(&result, tpl, 1, URI_TEMPLATE_ALLOW_RESERVED);
       }
     }
-    
+
     tpl++;
   }
 

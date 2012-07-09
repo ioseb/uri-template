@@ -170,7 +170,7 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
     if (*tpl == '{') {
       start = tpl + 1;
 
-      while (*(tpl++) && *tpl != '}');
+      while (*(tpl++) && *tpl != '}' && *tpl != '{');
 
       if (*tpl == '}') {
         uri_template_expr *expr = build_expr(start, tpl - start);
@@ -190,6 +190,10 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
         }
         
         uri_template_expr_free(expr);
+      } else if (*tpl == '{') {
+        smart_str_appendl(&result, start - 1, tpl - start + 1);
+        state = URI_TEMPLATE_ERROR_SYNTAX;
+        tpl--;
       } else {
         smart_str_appendc(&result, '{');
         smart_str_appendl(&result, start, tpl - start);

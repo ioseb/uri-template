@@ -11,7 +11,7 @@ inline static int extract_num(char *str, int len)
 	char buff[len + 1];
 	strncpy(buff, str, len);
 	buff[len] = 0;
-	
+
 	return atoi(buff);
 }
 
@@ -51,7 +51,7 @@ static uri_template_expr *build_expr(char *tpl, int len)
 
 				if (*tpl >= '1' && *tpl++ <= '9') {
 					while (isdigit(*tpl)) {
-					  tpl++;
+						tpl++;
 					}
 					
 					if (*tpl == ',' || *tpl == '}') {
@@ -90,18 +90,14 @@ static uri_template_expr *build_expr(char *tpl, int len)
 				
 				break;
 			default:
-				expr->error |= !(
-					isalnum(*tpl) || 
-					*tpl == '_' ||
-					*tpl == '.'
-				);
+				expr->error |= !(isalnum(*tpl) || *tpl == '_' || *tpl == '.');
 				
 				break;
 		}
 		
 		tpl++;
 	}
-	
+
 	return expr;
 }
 

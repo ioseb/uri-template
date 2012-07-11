@@ -73,7 +73,7 @@ static void process_associative_array(URI_TEMPLATE_PROCESSING_ARGS)
 			if (var->explode) {
 				if (!Z_STRLEN_PP(entry)) {
 					if (expr->ifemp) {
-					  smart_str_appendc(result, expr->ifemp);
+						smart_str_appendc(result, expr->ifemp);
 					}
 				} else {
 					smart_str_appendc(result, '=');

@@ -7,7 +7,7 @@ http://pear.php.net/dtd/package-2.0.xsd">
   <channel>pecl.php.net</channel>
   <summary>uri_template extension</summary>
   <description>
-URI Template
+Implementation of URI Template(RFC6570) specification for PHP.
   </description>
   <lead>
     <name>Ioseb Dzmanashvili</name>

@@ -37,6 +37,70 @@ URI Template
       <file name="uri_template_processor.c" role="src" />
       <file name="uri_template_parser.c" role="src" />
       <file name="uri_template_common.c" role="src" />
+      
+      <!-- tests -->
+      <file name="tests/err1.phpt" role="test" />
+      <file name="tests/err21.phpt" role="test" />
+      <file name="tests/ex1a3.phpt" role="test" />
+      <file name="tests/level1a1.phpt" role="test" />
+      <file name="tests/level4a3.phpt" role="test" />
+      <file name="tests/err10.phpt" role="test" />
+      <file name="tests/err22.phpt" role="test" />
+      <file name="tests/ex1a4.phpt" role="test" />
+      <file name="tests/level2a1.phpt" role="test" />
+      <file name="tests/level4a4.phpt" role="test" />
+      <file name="tests/err11.phpt" role="test" />
+      <file name="tests/err23.phpt" role="test" />
+      <file name="tests/expansion0.phpt" role="test" />
+      <file name="tests/level2a2.phpt" role="test" />
+      <file name="tests/level4a5.phpt" role="test" />
+      <file name="tests/err12.phpt" role="test" />
+      <file name="tests/err24.phpt" role="test" />
+      <file name="tests/expansion1.phpt" role="test" />
+      <file name="tests/level3a1.phpt" role="test" />
+      <file name="tests/level4a6.phpt" role="test" />
+      <file name="tests/err13.phpt" role="test" />
+      <file name="tests/err3.phpt" role="test" />
+      <file name="tests/expansion2.phpt" role="test" />
+      <file name="tests/level3a2.phpt" role="test" />
+      <file name="tests/level4a7.phpt" role="test" />
+      <file name="tests/err14.phpt" role="test" />
+      <file name="tests/err4.phpt" role="test" />
+      <file name="tests/expansion3.phpt" role="test" />
+      <file name="tests/level3a3.phpt" role="test" />
+      <file name="tests/level4a8.phpt" role="test" />
+      <file name="tests/err15.phpt" role="test" />
+      <file name="tests/err5.phpt" role="test" />
+      <file name="tests/expansion4.phpt" role="test" />
+      <file name="tests/level3a4.phpt" role="test" />
+      <file name="tests/mb1.phpt" role="test" />
+      <file name="tests/err16.phpt" role="test" />
+      <file name="tests/err6.phpt" role="test" />
+      <file name="tests/expansion5.phpt" role="test" />
+      <file name="tests/level3a5.phpt" role="test" />
+      <file name="tests/mb2.phpt" role="test" />
+      <file name="tests/err17.phpt" role="test" />
+      <file name="tests/err7.phpt" role="test" />
+      <file name="tests/expansion6.phpt" role="test" />
+      <file name="tests/level3a6.phpt" role="test" />
+      <file name="tests/var1braces.phpt" role="test" />
+      <file name="tests/err18.phpt" role="test" />
+      <file name="tests/err8.phpt" role="test" />
+      <file name="tests/expansion7.phpt" role="test" />
+      <file name="tests/level3a7.phpt" role="test" />
+      <file name="tests/var2empty.phpt" role="test" />
+      <file name="tests/err19.phpt" role="test" />
+      <file name="tests/err9.phpt" role="test" />
+      <file name="tests/expansion8.phpt" role="test" />
+      <file name="tests/level3a8.phpt" role="test" />
+      <file name="tests/err2.phpt" role="test" />
+      <file name="tests/ex1a1.phpt" role="test" />
+      <file name="tests/extended1a1.phpt" role="test" />
+      <file name="tests/level4a1.phpt" role="test" />
+      <file name="tests/err20.phpt" role="test" />
+      <file name="tests/ex1a2.phpt" role="test" />
+      <file name="tests/extended1a2.phpt" role="test" />
+      <file name="tests/level4a2.phpt" role="test" />
     </dir>
   </contents>
   <dependencies>

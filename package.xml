@@ -15,7 +15,7 @@ Implementation of URI Template(RFC6570) specification for PHP.
     <email>ioseb.dzmanashvili@gmail.com</email>
     <active>yes</active>
   </lead>
-  <date>2012-08-01</date>
+  <date>2012-07-31</date>
   <version>
     <release>0.99.1</release>
     <api>0.99.1</api>
@@ -39,15 +39,15 @@ Implementation of URI Template(RFC6570) specification for PHP.
       <file name="uri_template_common.c" role="src" />
       
       <!-- example -->
-      <file name="tests/form_style_query_continuation.php" role="doc" />
-      <file name="tests/path_style_parameter_expansion.php" role="doc" />
-      <file name="tests/form_style_query_expansion.php" role="doc" />
-      <file name="tests/reserved_expansion.php" role="doc" />
-      <file name="tests/fragment_expansion.php" role="doc" />
-      <file name="tests/simple_string_expansion.php" role="doc" />
-      <file name="tests/label_expansion_with_dot_prefix.php" role="doc" />
-      <file name="tests/variable_expansion.php" role="doc" />
-      <file name="tests/path_segment_expansion.php" role="doc" />
+      <file name="examples/form_style_query_continuation.php" role="doc" />
+      <file name="examples/path_style_parameter_expansion.php" role="doc" />
+      <file name="examples/form_style_query_expansion.php" role="doc" />
+      <file name="examples/reserved_expansion.php" role="doc" />
+      <file name="examples/fragment_expansion.php" role="doc" />
+      <file name="examples/simple_string_expansion.php" role="doc" />
+      <file name="examples/label_expansion_with_dot_prefix.php" role="doc" />
+      <file name="examples/variable_expansion.php" role="doc" />
+      <file name="examples/path_segment_expansion.php" role="doc" />
       
       <!-- tests -->
       <file name="tests/err1.phpt" role="test" />

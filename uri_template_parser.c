@@ -6,6 +6,11 @@
 #define IS_OPERATOR(c) c == '+' || c == '#' || c == '.' || \
 	c == '/' || c == ';' || c == '?' || c == '&'
 
+inline static int extract_num(char *str, int len);
+inline static void append_malformed_expr(smart_str *dest, char *tpl, int len);
+static void add_expr_to_array(zval *expressions, uri_template_expr *expr);
+static uri_template_expr *build_expr(char *tpl, int len);
+
 inline static int extract_num(char *str, int len)
 {
 	char buff[len + 1];
@@ -34,9 +39,9 @@ static uri_template_expr *build_expr(char *tpl, int len)
 				if (name + len - tpl > 2) {
 					if (isxdigit(*(tpl + 1))) {
 						if (isxdigit(*(++tpl + 1))) {
-					    	tpl++;
+							tpl++;
 						} else {
-					    	expr->error = URI_TEMPLATE_ERROR;
+							expr->error = URI_TEMPLATE_ERROR;
 						}
 					} else {
 						expr->error = URI_TEMPLATE_ERROR;
@@ -108,7 +113,7 @@ inline static void append_malformed_expr(smart_str *dest, char *tpl, int len)
 	smart_str_appendc(dest, '}');
 }
 
-inline static void add_expr_to_array(zval *expressions, uri_template_expr *expr)
+static void add_expr_to_array(zval *expressions, uri_template_expr *expr)
 {
 	uri_template_var *next;
 	zval *result;

@@ -48,3 +48,4 @@ scan_makefile_in.awk
 *.gcda
 *.gcno
 run-tests.php
+uri_template.tmproj

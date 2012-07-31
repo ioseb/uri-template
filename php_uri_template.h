@@ -1,3 +1,11 @@
+/*
+  +----------------------------------------------------------------------+
+  | See LICENSE file for further copyright information                   |
+  +----------------------------------------------------------------------+
+  | Authors: Ioseb Dzmanashvili <ioseb@php.net>                          |
+  +----------------------------------------------------------------------+
+*/
+
 #ifndef PHP_URI_TEMPLATE_H
 #define PHP_URI_TEMPLATE_H
 

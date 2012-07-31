@@ -1,3 +1,11 @@
+/*
+  +----------------------------------------------------------------------+
+  | See LICENSE file for further copyright information                   |
+  +----------------------------------------------------------------------+
+  | Authors: Ioseb Dzmanashvili <ioseb@php.net>                          |
+  +----------------------------------------------------------------------+
+*/
+
 #include "php_uri_template.h"
 
 #define MAX_ONE_BYTE_CHAR   0x7f

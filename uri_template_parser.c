@@ -1,3 +1,11 @@
+/*
+  +----------------------------------------------------------------------+
+  | See LICENSE file for further copyright information                   |
+  +----------------------------------------------------------------------+
+  | Authors: Ioseb Dzmanashvili <ioseb@php.net>                          |
+  +----------------------------------------------------------------------+
+*/
+
 #include "php_uri_template.h"
 
 #define SHIFT_BACK(var) (!var->explode ? var->length == 0 \

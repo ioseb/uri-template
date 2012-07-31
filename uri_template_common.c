@@ -1,3 +1,11 @@
+/*
+  +----------------------------------------------------------------------+
+  | See LICENSE file for further copyright information                   |
+  +----------------------------------------------------------------------+
+  | Authors: Ioseb Dzmanashvili <ioseb@php.net>                          |
+  +----------------------------------------------------------------------+
+*/
+
 #include "php_uri_template.h"
 
 uri_template_vars *uri_template_vars_create()

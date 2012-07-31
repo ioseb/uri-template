@@ -1,3 +1,11 @@
+/*
+  +----------------------------------------------------------------------+
+  | See LICENSE file for further copyright information                   |
+  +----------------------------------------------------------------------+
+  | Authors: Ioseb Dzmanashvili <ioseb@php.net>                          |
+  +----------------------------------------------------------------------+
+*/
+
 #include "php_uri_template.h"
 
 /* {{{ proto mixed uri_template(constant template, array variables [, mixed result])
@@ -31,6 +39,26 @@ ZEND_BEGIN_ARG_INFO_EX(uri_template_arg_info, 0, 3, 2)
 	ZEND_ARG_INFO(1, "result")
 ZEND_END_ARG_INFO()
 /* }}} */
+
+/* {{{ PHP_MINFO_FUNCTION
+ */
+PHP_MINFO_FUNCTION(uri_template)
+{
+	php_info_print_table_start();
+	php_info_print_table_header(2, "uri_template support", "enabled");
+	php_info_print_table_end();
+}
+/* }}} */
+
+/* {{{ PHP_MINIT_FUNCTION
+ */
+PHP_MINIT_FUNCTION(uri_template)
+{
+	REGISTER_STRING_CONSTANT("URI_TEMPLATE_ERROR_NONE",             URI_TEMPLATE_ERROR_NONE, CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("URI_TEMPLATE_ERROR",                       URI_TEMPLATE_ERROR, CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("URI_TEMPLATE_ERROR_SYNTAX",         URI_TEMPLATE_ERROR_SYNTAX, CONST_CS | CONST_PERSISTENT);
+	REGISTER_STRING_CONSTANT("URI_TEMPLATE_ERROR_EXPRESSION", URI_TEMPLATE_ERROR_EXPRESSION, CONST_CS | CONST_PERSISTENT);
+}
 
 /* {{{ uri_template_functions[]
  */

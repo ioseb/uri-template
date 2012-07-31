@@ -208,24 +208,24 @@ void uri_template_process(uri_template_expr *expr, zval *vars, smart_str *result
 	zend_bool status = 0;
 	zend_bool processed = 0;
 	int i = 0;
-	
+
 	while (var != NULL) {
 		smart_str eval = {0};
 		status = process_var(expr, var, vars, &eval);
 		
 		if (status) {
 			smart_str_0(&eval);
-			
+
 			if (i == 0 && expr->first) {
 				smart_str_appendc(result, expr->first);
 				i++;
 			} else if (processed) {
 				smart_str_appendc(result, expr->sep);
 			}
-			
+
 			smart_str_appendl(result, eval.c, eval.len);
 		}
-		
+
 		smart_str_free(&eval);
 		processed |= status;
 		var = var->next;

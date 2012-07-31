@@ -2,7 +2,7 @@
   +----------------------------------------------------------------------+
   | See LICENSE file for further copyright information                   |
   +----------------------------------------------------------------------+
-  | Authors: Ioseb Dzmanashvili <ioseb@php.net>                          |
+  | Authors: Ioseb Dzmanashvili <ioseb.dzmanashvili@gmail.com>           |
   +----------------------------------------------------------------------+
 */
 

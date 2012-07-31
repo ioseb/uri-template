@@ -12,19 +12,19 @@ URI Template
   <lead>
     <name>Ioseb Dzmanashvili</name>
     <user>ioseb</user>
-    <email>ioseb@php.net</email>
+    <email>ioseb.dzmanashvili@gmail.com</email>
     <active>yes</active>
   </lead>
-  <date>2012-07-26</date>
+  <date>2012-08-01</date>
   <version>
-    <release>0.1</release>
-    <api>0.1</api>
+    <release>0.99.1</release>
+    <api>0.99.1</api>
   </version>
   <stability>
-    <release>alpha</release>
-    <api>alpha</api>
+    <release>beta</release>
+    <api>beta</api>
   </stability>
-  <license uri="http://www.php.net/license/3_01.txt">The PHP License</license>
+  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
   <notes>
     - Initial release
   </notes>
@@ -37,6 +37,17 @@ URI Template
       <file name="uri_template_processor.c" role="src" />
       <file name="uri_template_parser.c" role="src" />
       <file name="uri_template_common.c" role="src" />
+      
+      <!-- example -->
+      <file name="tests/form_style_query_continuation.php" role="doc" />
+      <file name="tests/path_style_parameter_expansion.php" role="doc" />
+      <file name="tests/form_style_query_expansion.php" role="doc" />
+      <file name="tests/reserved_expansion.php" role="doc" />
+      <file name="tests/fragment_expansion.php" role="doc" />
+      <file name="tests/simple_string_expansion.php" role="doc" />
+      <file name="tests/label_expansion_with_dot_prefix.php" role="doc" />
+      <file name="tests/variable_expansion.php" role="doc" />
+      <file name="tests/path_segment_expansion.php" role="doc" />
       
       <!-- tests -->
       <file name="tests/err1.phpt" role="test" />

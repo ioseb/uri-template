@@ -24,11 +24,11 @@ Implementation of URI Template(RFC6570) specification for PHP.
     <release>beta</release>
     <api>beta</api>
   </stability>
+  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
   <notes>
-- Fixed bug: pct-encoded literals outside of varspecs must be copied directly
+- Fixed bug: pct-encoded literals outside of varspecs must be copied directly, https://github.com/ioseb/uri-template/issues/1
 - Fixed bug: encoding and copying of utf8 literals outside of varspecs
   </notes>
-  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
   <contents>
     <dir name="/">
       <file name="config.m4" role="src" />

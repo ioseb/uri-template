@@ -228,13 +228,13 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
 				smart_str_appendc(&result, *(++tpl));
 				smart_str_appendc(&result, *(++tpl));
 			} else {
-        int result_len = result.len;
-        int distance = 0;
+				int result_len = result.len;
+				int distance = 0;
+
+				uri_template_substr_copy(&result, tpl, 1, URI_TEMPLATE_ALLOW_RESERVED);
         
-        uri_template_substr_copy(&result, tpl, 1, URI_TEMPLATE_ALLOW_RESERVED);
-        
-        distance = result.len - result_len;
-        tpl += (distance % 3 ? 1 : distance / 3) - 1;
+				distance = result.len - result_len;
+				tpl += (distance % 3 ? 1 : distance / 3) - 1;
 			}
 		}
 

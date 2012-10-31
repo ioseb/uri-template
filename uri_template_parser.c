@@ -225,10 +225,16 @@ void uri_template_parse(char *tpl, zval *return_value, zval *vars, zval *capture
 				state = URI_TEMPLATE_ERROR_SYNTAX;
 			} else if (c == '%' && isxdigit(*(tpl + 1)) && isxdigit(*(tpl + 2))) {
 				smart_str_appendc(&result, '%');
-				smart_str_appendc(&result, *tpl++);
-				smart_str_appendc(&result, *tpl++);
+				smart_str_appendc(&result, *(++tpl));
+				smart_str_appendc(&result, *(++tpl));
 			} else {
-				uri_template_substr_copy(&result, tpl, 1, URI_TEMPLATE_ALLOW_RESERVED);
+        int result_len = result.len;
+        int distance = 0;
+        
+        uri_template_substr_copy(&result, tpl, 1, URI_TEMPLATE_ALLOW_RESERVED);
+        
+        distance = result.len - result_len;
+        tpl += (distance % 3 ? 1 : distance / 3) - 1;
 			}
 		}
 

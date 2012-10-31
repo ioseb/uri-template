@@ -49,3 +49,4 @@ scan_makefile_in.awk
 *.gcno
 run-tests.php
 uri_template.tmproj
+.DS_Store

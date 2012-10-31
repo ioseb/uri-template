@@ -15,19 +15,20 @@ Implementation of URI Template(RFC6570) specification for PHP.
     <email>ioseb.dzmanashvili@gmail.com</email>
     <active>yes</active>
   </lead>
-  <date>2012-07-31</date>
+  <date>2012-10-31</date>
   <version>
-    <release>0.99.1</release>
+    <release>0.99.2</release>
     <api>0.99.1</api>
   </version>
   <stability>
     <release>beta</release>
     <api>beta</api>
   </stability>
-  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
   <notes>
-    - Initial release
+- Fixed bug: pct-encoded literals outside of varspecs must be copied directly
+- Fixed bug: encoding and copying of utf8 literals outside of varspecs
   </notes>
+  <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
   <contents>
     <dir name="/">
       <file name="config.m4" role="src" />
@@ -50,6 +51,11 @@ Implementation of URI Template(RFC6570) specification for PHP.
       <file name="examples/path_segment_expansion.php" role="doc" />
       
       <!-- tests -->
+      <file name="tests/copyliterals1.phpt" role="test" />
+      <file name="tests/copyliterals2.phpt" role="test" />
+      <file name="tests/copyliterals3.phpt" role="test" />
+      <file name="tests/copyliterals4.phpt" role="test" />
+      <file name="tests/copyliterals5.phpt" role="test" />
       <file name="tests/err1.phpt" role="test" />
       <file name="tests/err21.phpt" role="test" />
       <file name="tests/ex1a3.phpt" role="test" />
@@ -126,4 +132,20 @@ Implementation of URI Template(RFC6570) specification for PHP.
   </dependencies>
   <providesextension>uri_template</providesextension>
   <extsrcrelease></extsrcrelease>
+	<changelog>
+    <release>
+      <date>2012-07-31</date>
+      <version>
+        <release>0.99.1</release>
+        <api>0.99.1</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <notes>
+        - Initial release
+      </notes>
+    </release>
+  </changelog>
 </package>

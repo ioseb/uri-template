@@ -1,0 +1,11 @@
+// $Id$
+// vim:ft=javascript
+
+ARG_ENABLE("uri-template", "Whether to enable the uri template extension", "no");
+
+if (PHP_URI_TEMPLATE != "no") {
+
+	AC_DEFINE("HAVE_URI_TEMPLATE", 1);
+	EXTENSION("uri_template", "uri_template.c uri_template_common.c uri_template_parser.c uri_template_processor.c uri_template_string.c");
+}
+

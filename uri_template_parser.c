@@ -21,11 +21,19 @@ static uri_template_expr *build_expr(char *tpl, int len);
 
 inline static int extract_num(char *str, int len)
 {
-	char buff[len + 1];
+	char *buff;
+	int ret;
+
+	buff = emalloc(sizeof(char) * (len+1));
+
 	strncpy(buff, str, len);
 	buff[len] = 0;
 
-	return atoi(buff);
+	ret = atoi(buff);
+
+	efree(buff);
+
+	return ret;
 }
 
 static uri_template_expr *build_expr(char *tpl, int len)

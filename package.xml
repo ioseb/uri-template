@@ -32,6 +32,7 @@ Implementation of URI Template(RFC6570) specification for PHP.
   <contents>
     <dir name="/">
       <file name="config.m4" role="src" />
+      <file name="config.w32" role="src" />
       <file name="php_uri_template.h" role="src" />
       <file name="uri_template.c" role="src" />
       <file name="uri_template_string.c" role="src" />
@@ -149,3 +150,4 @@ Implementation of URI Template(RFC6570) specification for PHP.
     </release>
   </changelog>
 </package>
+

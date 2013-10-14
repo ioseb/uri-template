@@ -84,7 +84,7 @@ zend_module_entry uri_template_module_entry = {
 	NULL,
 	PHP_MINFO(uri_template),
 #if ZEND_MODULE_API_NO >= 20010901
-	PHP_URI_TEMPLATE_EXTVER,
+	PHP_URI_TEMPLATE_VERSION,
 #endif
 	STANDARD_MODULE_PROPERTIES
 };

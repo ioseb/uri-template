@@ -10,7 +10,7 @@
 #define PHP_URI_TEMPLATE_H
 
 #define PHP_URI_TEMPLATE_EXTNAME "uri_template"
-#define PHP_URI_TEMPLATE_EXTVER  "0.1"
+#define PHP_URI_TEMPLATE_EXTVER  "0.99.3"
 
 #define URI_TEMPLATE_ERROR_NONE       0
 #define URI_TEMPLATE_ERROR            1

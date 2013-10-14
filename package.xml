@@ -15,19 +15,20 @@ Implementation of URI Template(RFC6570) specification for PHP.
     <email>ioseb.dzmanashvili@gmail.com</email>
     <active>yes</active>
   </lead>
-  <date>2012-10-31</date>
+  <date>2013-10-14</date>
   <version>
-    <release>0.99.2</release>
-    <api>0.99.1</api>
+    <release>1.0</release>
+    <api>1.0</api>
   </version>
   <stability>
-    <release>beta</release>
-    <api>beta</api>
+    <release>stable</release>
+    <api>stable</api>
   </stability>
   <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
   <notes>
-- Fixed bug: pct-encoded literals outside of varspecs must be copied directly, https://github.com/ioseb/uri-template/issues/1
-- Fixed bug: encoding and copying of utf8 literals outside of varspecs
+- Fixed extended version: https://github.com/ioseb/uri-template/issues/6
+- Package includes LICENSE and README.md files
+- Windows fix by Anatol Belski: https://github.com/ioseb/uri-template/pull/4
   </notes>
   <contents>
     <dir name="/">
@@ -137,6 +138,22 @@ Implementation of URI Template(RFC6570) specification for PHP.
   <providesextension>uri_template</providesextension>
   <extsrcrelease></extsrcrelease>
   <changelog>
+	<release>
+      <date>2012-10-31</date>
+      <version>
+        <release>0.99.2</release>
+        <api>0.99.1</api>
+      </version>
+      <stability>
+        <release>beta</release>
+        <api>beta</api>
+      </stability>
+      <license uri="http://www.php.net/license/3_01.txt">PHP License</license>
+      <notes>
+- Fixed bug: pct-encoded literals outside of varspecs must be copied directly, https://github.com/ioseb/uri-template/issues/1
+- Fixed bug: encoding and copying of utf8 literals outside of varspecs
+      </notes>
+	</release>
     <release>
       <date>2012-07-31</date>
       <version>

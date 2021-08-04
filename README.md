@@ -1,7 +1,7 @@
 URI Template PHP Extension
 ============
 
-PHP extension implementation of RFC-6570 in C - http://tools.ietf.org/html/rfc6570
+PHP extension implementation of RFC-6570 in C - https://datatracker.ietf.org/doc/html/rfc6570
 
 Basic usage
 -----------
